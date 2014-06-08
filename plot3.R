@@ -3,6 +3,8 @@
 consumptionData <- read.table("household_power_consumption.txt", header=F, sep=";", colClasses = "character")
 ## Selection of the needed data
 selectionData <- consumptionData[grepl("^[12]/2/2007", consumptionData[,1]),]
+## Set German to English for the right day labels
+Sys.setlocale(category = "LC_TIME", locale = "C")
 ## Binding Date and Time together to a single column
 selectionData <- cbind(strptime(paste(selectionData[,1], selectionData[,2]), format="%d/%m/%Y %H:%M:%S"), selectionData[,-c(1,2)])
 ## Naming of the column headers
